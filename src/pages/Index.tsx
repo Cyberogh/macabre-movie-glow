@@ -1,5 +1,6 @@
 import { MovieCard } from '@/components/MovieCard';
 import { BackgroundEffects } from '@/components/BackgroundEffects';
+import { SoundEffects } from '@/components/SoundEffects';
 import { movies } from '@/data/movies';
 import graveyardBg from '@/assets/graveyard-bg.jpg';
 
@@ -12,6 +13,7 @@ const Index = () => {
         style={{ backgroundImage: `url(${graveyardBg})` }}
       />
       <BackgroundEffects />
+      <SoundEffects />
 
       {/* Content */}
       <div className="relative z-10 px-4 py-16 lg:py-24">
@@ -53,18 +55,13 @@ const Index = () => {
         {/* Movie grid */}
         <section className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 xl:gap-16">
-            {movies.map((movie, index) => (
-              <div
+            {movies.map((movie) => (
+              <MovieCard
                 key={movie.id}
-                className="opacity-0 animate-[fade-in_0.8s_ease-out_forwards]"
-                style={{ animationDelay: `${index * 0.15}s` }}
-              >
-                <MovieCard
-                  id={movie.id}
-                  title={movie.title}
-                  image={movie.image}
-                />
-              </div>
+                id={movie.id}
+                title={movie.title}
+                image={movie.image}
+              />
             ))}
           </div>
         </section>
