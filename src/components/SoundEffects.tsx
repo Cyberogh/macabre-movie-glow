@@ -2,15 +2,20 @@ import { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
 export const SoundEffects = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Create audio element with ambient Halloween sounds (wind, creaking)
-    // Using a Halloween ambient sound from a reliable source
     audioRef.current = new Audio('https://assets.mixkit.co/active_storage/sfx/2459/2459-preview.mp3');
     audioRef.current.loop = true;
-    audioRef.current.volume = 0.3;
+    audioRef.current.volume = 0.5;
+    
+    // Auto-play on mount
+    audioRef.current.play().catch(err => {
+      console.log('Audio autoplay prevented:', err);
+      setIsPlaying(false);
+    });
 
     return () => {
       if (audioRef.current) {
